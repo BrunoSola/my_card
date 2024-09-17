@@ -9,18 +9,18 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       home: Scaffold(
-        backgroundColor: Color.fromARGB(255, 69, 56, 255),
+        backgroundColor: const Color.fromRGBO(69, 56, 255, 1),
         body: Center(
           child: SafeArea(
             child: Column(
               children: <Widget>[
-                CircleAvatar(
+                const CircleAvatar(
                   backgroundImage: AssetImage('assets/images/perfil_avatar.jpg'),
                   radius: 50.0,
                 ),
-                Text(
+                const Text(
                   'Bruno dos Reis Sola', 
                   style: TextStyle(
                     fontSize: 40.0,
@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
                     fontFamily: 'Pacifico',
                   ),
                 ),
-                Text(
+                const Text(
                   'DESENVOLVEDOR FLUTTER',
                   style: TextStyle(              
                     fontFamily: 'SourceCodePro',
@@ -39,13 +39,36 @@ class MyApp extends StatelessWidget {
                     letterSpacing: 2,
                   ),
                 ),
-                Container(child: Row(),)),
-              ],
+                Container(
+                  color: Colors.white,
+                  margin: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 30.0),
+                  padding: const EdgeInsets.all(10.0),
+                  child: const Row(
+                    children: <Widget>[
+                      Icon(
+                        Icons.email,
+                        color: Color.fromRGBO(69, 56, 255, 1),
+                      ),
+                      SizedBox(
+                        width: 10.0,
+                      ),
+                      Text(
+                        'Brunosola.profissional@gmail.com',
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontFamily: 'Roboto',
+                          fontWeight: FontWeight.bold,
+                          letterSpacing: 1.5,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ]
             ),
           ),
         ),
       ),
     );
   }
-
 }
