@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 
-void main() {
+Future<void> main() async {
+  await dotenv.load(fileName: ".env");
   runApp(const MyApp());
 }
 
@@ -26,6 +29,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+      String telefone = dotenv.env['TELEFONE']?? 'telefone padrão';
+      String email = dotenv.env['EMAIL']?? 'E-mail padrão';
+
+
     return MaterialApp(
       home: Scaffold(
         backgroundColor: const Color.fromRGBO(69, 56, 255, 1),
@@ -38,14 +45,16 @@ class MyApp extends StatelessWidget {
                   backgroundImage: AssetImage('assets/images/perfil_avatar.jpg'),
                   radius: 50.0,
                 ),
-                const Text(
+                const AutoSizeText(
                   'Bruno dos Reis Sola', 
                   style: TextStyle(
-                    fontSize: 30.0,
+                    fontSize: 40.0,
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
                     fontFamily: 'Pacifico',
                   ),
+                  maxLines: 1,
+                  minFontSize: 12.0,
                 ),
                 const Text(
                   'DESENVOLVEDOR FLUTTER',
@@ -103,6 +112,18 @@ class MyApp extends StatelessWidget {
                     ),
                   ),
                 ),
+                Card( //Whatsapp
+                  margin: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 30.0),
+                  child: ListTile(
+                    leading: TextButton.icon(
+                      icon: const FaIcon(FontAwesomeIcons.whatsapp),
+                      label: const Text('WhatsApp'),
+                      onPressed: () {
+                        abrirUrls('https://wa.me/$telefone?text=Gostei%20da%20apresentação%20digital');
+                      }
+                    ),
+                  ),
+                ),
                 Card( //E-mail
                   margin: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 30.0),
                   child: ListTile(
@@ -110,7 +131,7 @@ class MyApp extends StatelessWidget {
                       icon: const Icon(Icons.email),
                       label: const Text('E-mail'),
                       onPressed: () {
-                        abrirUrls('mailto:brunosola.profissional@gmail.com');
+                        abrirUrls('mailto:$email');
                       }
                     ),
                   ),
